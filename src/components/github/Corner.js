@@ -4,7 +4,7 @@ import './style.css';
 
 export default () => (
   <a
-    href="https://github.com/vfalada/tesena-ci-2019"
+    href="https://github.com/vfalada/4IT572_circleci"
     className="github-corner"
     aria-label="View source on Github"
   >
