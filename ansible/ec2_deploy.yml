@@ -12,9 +12,7 @@
         aws_secret_key: dgSVwAjjkLK/GtLrnrd/edkvFV0mcLJpfC0oGeCQ
         security_token: FwoGZXIvYXdzEJr//////////wEaDCqYN2SOMs0ThwEUjiLIAQJ2pRYzxvMT0EotecA7QKKhFhXtm9RYbROHqTrP8+1IZwWDRzjPROShRS8Nwk06itP2ZrdvwlqZlsW0ALYe0xAGcjUPHidQOHTCmBxeUMLrsy2Nff2y5DdKrQYoH8DaKKqBGaRRa3U3JKeD9Hve0C7Hzwne4nbH64i2RPjxm86UUG09Lne6eBUfHoCU5nNumzdu23gyFGx6auHGN1eewnv5yPBJngNRVn6oq4VaM89IJF2K3QrKDcW59dUY8GyllfhLAnw7kX7mKJSL7v4FMi28fQhjFDANJEyfB+r1uU/hpuJ79OmIbbgzMKd2ftt8qkrRjG4Kw1lbGzvSAwg=
       register: ec2_info
-    #- name: Debug
-    #  debug:
-    #    msg: "items: {{ ec2_info }}"
+
     - name: Launch EC2 instance
       ec2:
         instance_type: t2.small
@@ -35,10 +33,6 @@
     - name: Add instance host to group
       add_host: hostname={{ item.public_dns_name }} groupname=launched
       with_items: '{{ec2.instances}}'
-
-    #- name: accept new ssh fingerprints
-    #  shell: ssh-keyscan -H {{ item.public_ip }} >> /home/circleci/.ssh/known_hosts
-    #  with_items: '{{ ec2.instances }}'
 
     - name: Wait for SSH connection
       wait_for: host={{ item.public_dns_name }} port=22 delay=30 timeout=300 state=started
@@ -80,9 +74,6 @@
   connection: local
 
   tasks:
-    #- name: Debug
-    #   debug:
-    #     msg: "items: {{ ec2_info }}"
     - name: Terminate previous instances
       ec2:
         region: us-east-1
