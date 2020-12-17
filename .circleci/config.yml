@@ -29,8 +29,7 @@ jobs:
       - ansible-playbook/install
       - run:
          command: |
-          sudo pip install boto boto3 \
-          && ansible all --list-hosts
+          sudo pip install boto boto3
       - add_ssh_keys:
          fingerprints:
           - "87:b4:3d:e4:d1:00:17:c5:e0:70:2f:70:fc:02:22:b6"
