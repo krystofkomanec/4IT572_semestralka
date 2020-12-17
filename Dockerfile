@@ -4,7 +4,6 @@ COPY . .
 
 RUN npm install \
 	&& npm start \
-	&& npm install react-scripts --save \
 	&& npm run test \
 	&& npm run build \
 	&& npm run wdio
